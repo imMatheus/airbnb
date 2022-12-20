@@ -13,6 +13,9 @@
         },
         "db:connect": {
             "cache": false
+        },
+        "db:generate": {
+            "cache": false
         }
     }
 }
