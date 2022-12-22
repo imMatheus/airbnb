@@ -1,4 +1,5 @@
 import { Button, Search, Facebook, Instagram, Twitter } from "ui";
+import ListingCard from "@/components/ListingCard";
 
 export default function Web() {
   return (
@@ -9,6 +10,7 @@ export default function Web() {
       <Facebook />
       <Instagram />
       <Twitter />
+      <ListingCard />
     </div>
   );
 }
