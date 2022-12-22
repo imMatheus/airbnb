@@ -9,6 +9,102 @@ datasource db {
 }
 
 model User {
-  id   String @id @default(cuid())
-  name String
+  id      String   @id @default(cuid())
+  name    String
+  reviews Review[]
+}
+
+model Listing {
+  id                    String    @id @default(cuid())
+  name                  String
+  description           String    @db.Text
+  summary               String    @db.Text
+  space                 String    @db.Text
+  neighborhood_overview String?   @db.Text
+  notes                 String?   @db.Text
+  transit               String?   @db.Text
+  access                String?   @db.Text
+  interaction           String?   @db.Text
+  house_rules           String?   @db.Text
+  property_type         String
+  room_type             String
+  bed_type              String
+  accommodates          Int       @default(0)
+  bedrooms              Decimal   @default(0)
+  beds                  Decimal   @default(0)
+  bathrooms             Decimal   @default(0)
+  number_of_reviews     Int       @default(0)
+  minimum_nights        Int       @default(0)
+  maximum_nights        Int?
+  cancellation_policy   String?
+  price                 Decimal
+  weakly_price          Decimal?
+  monthly_price         Decimal?
+  security_deposit      Decimal?
+  cleaning_fee          Decimal?
+  extra_people          Decimal?
+  guests_included       Decimal?
+  last_scraped          DateTime?
+  calendar_last_scraped DateTime?
+  first_review          DateTime?
+  last_review           DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now()) @updatedAt
+  reviews               Review[]
+  address               Address?
+  scores                Scores?
+}
+
+model Scores {
+  id            String  @id @default(cuid())
+  accuracy      Int     @default(0)
+  cleanliness   Int     @default(0)
+  checkin       Int     @default(0)
+  communication Int     @default(0)
+  location      Int     @default(0)
+  value         Int     @default(0)
+  rating        Int     @default(0)
+  listing_id    String  @unique
+  listinig      Listing @relation(fields: [listing_id], references: [id])
+
+  @@index([rating])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  comments   String
+  listing_id String
+  listing    Listing  @relation(fields: [listing_id], references: [id])
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@index([listing_id])
+  @@index([user_id])
+}
+
+model Amenities {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Address {
+  id              String   @id @default(cuid())
+  street          String
+  suburb          String?
+  government_area String
+  country         String
+  market          String
+  country_code    String
+  coordinate_x    Decimal
+  coordinate_y    Decimal
+  listing_id      String   @unique
+  listing         Listing  @relation(fields: [listing_id], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+
+  @@index([listing_id, market, country, coordinate_x, coordinate_y])
 }
