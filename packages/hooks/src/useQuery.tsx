@@ -1,8 +1,13 @@
 import useSWR from "swr";
 import type { AppController } from "../../../apps/server/src/app.controller";
+import type { Routes } from "./routes";
 
-export function useQuery() {
-  const { data, error, isLoading } = useSWR<
-    Awaited<ReturnType<AppController["getHello"]>>
-  >("/api/user/123", (url) => fetch(url).then((res) => res.json()));
+interface Params {}
+
+export function useQuery(url: keyof Routes) {
+  const fullUrl = `http://localhost:4000${url}`;
+
+  const { data, error, isLoading } = useSWR<any>(fullUrl, (url) =>
+    fetch(url).then((res) => res.json())
+  );
 }
