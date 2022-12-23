@@ -1,4 +1,4 @@
-import { Button, Search, Facebook, Instagram, Twitter } from "ui";
+import { Search, Facebook, Instagram, Twitter } from "ui";
 import ListingCard from "@/components/ListingCard";
 
 export default function Web() {
@@ -6,7 +6,6 @@ export default function Web() {
     <div>
       <h1>Web då</h1>
       <Search />
-      <Button />
       <Facebook />
       <Instagram />
       <Twitter />
