@@ -1,13 +1,15 @@
-import useSWR from "swr";
-import type { AppController } from "../../../apps/server/src/app.controller";
-import type { Routes } from "./routes";
+import useSWR from 'swr'
+import type { AppController } from '../../../apps/server/src/app.controller'
+import type { Paths, Routes } from './routes'
+import queryString from 'query-string'
 
-interface Params {}
-
-export function useQuery(url: keyof Routes) {
-  const fullUrl = `http://localhost:4000${url}`;
-
-  const { data, error, isLoading } = useSWR<any>(fullUrl, (url) =>
-    fetch(url).then((res) => res.json())
-  );
+export function useQuery(
+    url: Paths,
+    options: { params: Routes['/listings/:id']['params'] }
+) {
+    const fullUrl = `http://localhost:4000${url}` as const
+    type F = Routes['/']['returns']
+    const { data, error, isLoading } = useSWR<any>(fullUrl, (url) =>
+        fetch(url).then((res) => res.json())
+    )
 }

@@ -11,8 +11,13 @@ export class ListingsService {
     return 'This action adds a new listing';
   }
 
-  findAll() {
-    return this.prisma.listing.findMany({ take: 10 });
+  async findAll() {
+    const listings = await this.prisma.listing.findMany({ take: 10 });
+    return { listings };
+  }
+
+  findAll2() {
+    return { message: 'as', x: 78 };
   }
 
   findOne(id: string) {
