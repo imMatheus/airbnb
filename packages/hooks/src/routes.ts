@@ -1,15 +1,10 @@
-import type { AppController } from '../../../apps/server/src/app.controller'
-import type { ListingsController } from '../../../apps/server/src/listings/listings.controller'
+import type { Routes, F } from '../../../apps/server/src/routes'
 
-// Helper type
-type Controller<T extends (...args: any) => any> = Awaited<ReturnType<T>>
-
-export interface Routes {
+const f: Routes = {
     '/': {
-        returns: Controller<AppController['health']>
-    }
-
+        returns: 'dsad',
+    },
     '/listings': {
-        returns: Controller<AppController['findAll']>
-    }
+        returns: [],
+    },
 }
