@@ -9,4 +9,8 @@ export class AppController {
   health() {
     return this.appService.health();
   }
+  @Get('/test')
+  findAll() {
+    return this.appService.findAll();
+  }
 }

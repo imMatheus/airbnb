@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
-import { MongoClient } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 
 @Injectable()
 export class AppService {
   constructor(private prisma: PrismaService) {}
+
+  findAll() {
+    return this.prisma.listing.findMany();
+  }
 
   async health() {
     // const users = await this.prisma.user.findMany();
