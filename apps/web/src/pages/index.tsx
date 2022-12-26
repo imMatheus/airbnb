@@ -1,6 +1,6 @@
 import { Search, Facebook, Instagram, Twitter } from 'ui'
 import ListingCard from '@/components/ListingCard'
-import type { Routes, F } from '../../../server/src/routes'
+import { Routes } from '@/server'
 
 export default function Index() {
     return (

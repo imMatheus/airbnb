@@ -18,7 +18,8 @@
         "jsx": "preserve",
         "baseUrl": "../../apps/web",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@/server": ["../server/src/types.d.ts"]
         }
     },
     "include": ["src", "next-env.d.ts"],

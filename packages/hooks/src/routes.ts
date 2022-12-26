@@ -1,10 +1,3 @@
-import type { Routes, F } from '../../../apps/server/src/routes'
+import type { Routes, F } from '../../../apps/server/src/types'
 
-const f: Routes = {
-    '/': {
-        returns: 'dsad',
-    },
-    '/listings': {
-        returns: [],
-    },
-}
+export { Routes, F }

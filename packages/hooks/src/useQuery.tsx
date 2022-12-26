@@ -1,15 +1,16 @@
+import type { Routes } from './routes'
+// import queryString from 'query-string'
 import useSWR from 'swr'
-import type { AppController } from '../../../apps/server/src/app.controller'
-import type { Paths, Routes } from './routes'
-import queryString from 'query-string'
+import React from 'react'
 
-export function useQuery(
-    url: Paths,
-    options: { params: Routes['/listings/:id']['params'] }
-) {
+const Test = ({}) => {
+    const data = useQuery('/listings')
+}
+
+export function useQuery<T extends keyof Routes>(url: T) {
     const fullUrl = `http://localhost:4000${url}` as const
-    type F = Routes['/']['returns']
-    const { data, error, isLoading } = useSWR<any>(fullUrl, (url) =>
+    const { data } = useSWR<Routes[T]['returns']>(fullUrl, (url) =>
         fetch(url).then((res) => res.json())
     )
+    return data
 }

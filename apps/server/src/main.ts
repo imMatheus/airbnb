@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import type { F } from './routes';
+import type { F } from './types';
 
 const PORT = 4000;
 
