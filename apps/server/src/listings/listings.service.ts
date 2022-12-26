@@ -13,14 +13,18 @@ export class ListingsService {
   }
 
   findAll(): PrismaPromise<
-    (Pick<Listing, 'name' | 'price'> & { address: Pick<Address, 'street'> } & {
+    (Pick<Listing, 'id' | 'name' | 'price' | 'number_of_reviews'> & {
+      address: Pick<Address, 'street'>;
+    } & {
       scores: Pick<Scores, 'rating'>;
     })[]
   > {
     return this.prisma.listing.findMany({
       select: {
+        id: true,
         name: true,
         price: true,
+        number_of_reviews: true,
         address: {
           select: {
             street: true,
