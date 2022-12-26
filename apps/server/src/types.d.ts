@@ -1,17 +1,15 @@
 import type { AppController } from './app.controller';
-// import type { ListingsController } from './listings/listings.controller';
+import type { ListingsController } from './listings/listings.controller';
 export * from '@prisma/client';
 
 // Helper type
 type Controller<T extends (...args: any) => any> = Awaited<ReturnType<T>>;
 
-export type Routes = {
+export interface Routes {
   '/': {
     returns: Controller<AppController['health']>;
   };
   '/listings': {
-    returns: Controller<AppController['findAll']>;
+    returns: Controller<ListingsController['findAll']>;
   };
-};
-
-export type F = Routes['/listings']['returns'];
+}

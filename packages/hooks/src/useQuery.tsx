@@ -9,8 +9,8 @@ const Test = ({}) => {
 
 export function useQuery<T extends keyof Routes>(url: T) {
     const fullUrl = `http://localhost:4000${url}` as const
-    const { data } = useSWR<Routes[T]['returns']>(fullUrl, (url) =>
+    const res = useSWR<Routes[T]['returns']>(fullUrl, (url) =>
         fetch(url).then((res) => res.json())
     )
-    return data
+    return res
 }

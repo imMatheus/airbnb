@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Address, Listing, PrismaPromise, Scores } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateListingDto } from './dto/create-listing.dto';
 import { UpdateListingDto } from './dto/update-listing.dto';
@@ -11,12 +12,28 @@ export class ListingsService {
     return 'This action adds a new listing';
   }
 
-  findAll() {
-    return this.prisma.listing.findMany();
-  }
-
-  findAll2() {
-    return { message: 'as', x: 78 };
+  findAll(): PrismaPromise<
+    (Pick<Listing, 'name' | 'price'> & { address: Pick<Address, 'street'> } & {
+      scores: Pick<Scores, 'rating'>;
+    })[]
+  > {
+    return this.prisma.listing.findMany({
+      select: {
+        name: true,
+        price: true,
+        address: {
+          select: {
+            street: true,
+          },
+        },
+        scores: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+      take: 4,
+    });
   }
 
   findOne(id: string) {

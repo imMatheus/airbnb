@@ -1,5 +1,9 @@
-import * as React from "react";
-export * from "./icons/Facebook";
-export * from "./icons/Instagram";
-export * from "./icons/Search";
-export * from "./icons/Twitter";
+import * as React from 'react'
+export * from './icons/Facebook'
+export * from './icons/Heart'
+export * from './icons/Instagram'
+export * from './icons/LogoIcon'
+export * from './icons/LogoText'
+export * from './icons/Search'
+export * from './icons/Star'
+export * from './icons/Twitter'
